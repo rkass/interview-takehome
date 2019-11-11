@@ -6,7 +6,7 @@ with open('requirements.txt') as f:
 version = 1.0
 
 setup(
-    name='searcher',
+    name='loader',
     version=version,
     python_requires='>=3.7.4',
     packages=find_packages(),

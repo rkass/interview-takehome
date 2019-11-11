@@ -14,17 +14,16 @@ services:
     volumes:
       - ./snapshot:/snapshot
       - ./conf/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-  searcher:
-    container_name: searcher
+  loader:
+    container_name: loader
     build:
-      dockerfile: Dockerfile.searcher
+      dockerfile: Dockerfile.loader
       context: .
     depends_on:
       - elasticsearch
     links:
       - elasticsearch
-    command: ["./wait-for-es.sh", "http://elasticsearch:9200", "python", "searcher/data_loader.py"]
-#    command: ["./wait-for-es.sh", "http://elasticsearch:9200", "tail", "-f", "/dev/null"]
+    command: ["./wait-for-es.sh", "http://elasticsearch:9200", "python", "loader/data_loader.py"]
     working_dir: "/src"
     volumes:
       - ./src:/src
