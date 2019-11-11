@@ -40,7 +40,7 @@ which can be accessed with a GET request. The route should accept the following 
 Your API should provide JSON responses in the following format:
 
 ```
-{"number_of_results": <integer>, "results": [<link to result>]}
+{"number_of_results": <integer>, "results": [{"title": <string title>, "link": <string link to result>}]}
 ```
 
 Also provide a `/status` endpoint which will serve as a health check endpoint. Upon successful initialization of your API,
