@@ -132,7 +132,7 @@ def create_snapshot():
 
 
 def prep_index():
-    snapshot_contents = os.listdir('/snapshot')
+    snapshot_contents = [f for f in os.listdir('/snapshot') if f != '.gitignore']
     if snapshot_contents:
         logger.info('Restoring wikis index')
         create_repo()
