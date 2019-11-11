@@ -13,35 +13,25 @@ INDEX_BODY = {
         }
     },
     "mappings": {
-      "default": {
-        "_meta": {
-          "index_type": "wikis",
-          "version": "1.0",
+      "_meta": {
+        "index_type": "wikis",
+        "version": "1.0",
+      },
+      "_source": {
+        "enabled": True
+      },
+      "properties": {
+        "id": {
+          "type": "keyword"
         },
-        "_source": {
-          "enabled": True
+        "link": {
+          "type": "keyword"
         },
-        "properties": {
-          "id": {
-            "type": "integer"
-          },
-          "link": {
-              "type": "keyword"
-          },
-          "title": {
-            "type": "text",
-          },
-          "contents": {
-            "type": "text"
-          },
-          "_meta": {
-            "schema": {
-              "type": "float"
-            },
-            "updated": {
-                "type": "date"
-            }
-          }
+        "title": {
+          "type": "text",
+        },
+        "contents": {
+          "type": "text"
         }
       }
     }
