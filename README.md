@@ -68,7 +68,7 @@ Clone this repo and make the necessary additions. Once you've done so, push the 
 - Proficiency in your chosen language. We don’t care too much about which technology you used to solve this problem, 
 as long as you show a good grasp of the technology you used. You might notice that the loader is written in python, but to reiterate,
 this does not mean your solution must be in python.
-- Relevance: Your solution should surface documents which have contents and titles related to the keywords being searched for. Don't spend too much time fine tuning
+- Relevance: Your solution should surface documents which have contents and titles related to the keywords being searched for. Beyond that, don't spend too much time fine tuning
 the relevance of the system.
 
-If your solution reaches this threshold of correctness we'll expand on this use case during your onsite interview.
+If your solution reaches this threshold of correctness we'll use this assignment as the basis for your onsite interview.
