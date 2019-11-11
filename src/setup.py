@@ -10,10 +10,5 @@ setup(
     version=version,
     python_requires='>=3.7.4',
     packages=find_packages(),
-    entry_points={
-        'console_scripts': [
-            'load-data=searcher.data_loader:load_data'
-        ]
-    },
     install_requires=requirements
 )

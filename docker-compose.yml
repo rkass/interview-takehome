@@ -11,16 +11,21 @@ services:
       - http.host=0.0.0.0
       - transport.host=127.0.0.1
       - xpack.security.enabled=false
+    volumes:
+      - ./snapshot:/snapshot
+      - ./conf/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
   searcher:
     container_name: searcher
     build:
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.searcher
       context: .
     depends_on:
       - elasticsearch
     links:
       - elasticsearch
-    command: ["./wait-for-es.sh", "http://elasticsearch:9200", "tail", "-f", "/dev/null"]
+    command: ["./wait-for-es.sh", "http://elasticsearch:9200", "python", "searcher/data_loader.py"]
+#    command: ["./wait-for-es.sh", "http://elasticsearch:9200", "tail", "-f", "/dev/null"]
     working_dir: "/src"
     volumes:
       - ./src:/src
+      - ./snapshot:/snapshot
