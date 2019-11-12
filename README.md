@@ -60,7 +60,7 @@ The service should be accessible over localhost on port `9250`. That is, we shou
 
 ### How to Submit
 
-Clone this repo and make the necessary additions. Once you've done so, push the updated repo to a new remote repository and send us the link.
+Clone this repo and make the necessary additions. Once you've done so, zip up the directory and send us the zipfile.
 
 ### How we're evaluating
 
