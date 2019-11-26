@@ -12,6 +12,7 @@ to the following lists which appear in the above article:
 - People
 - Singers
 - Actors
+- Athletes
 - Modern political leaders
 - Pre-modern people
 - 3rd-millennium people
@@ -68,6 +69,7 @@ Clone this repo and make the necessary additions. Once you've done so, zip up th
 - Proficiency in your chosen language. We don’t care too much about which technology you used to solve this problem, 
 as long as you show a good grasp of the technology you used. You might notice that the loader is written in python, but to reiterate,
 this does not mean your solution must be in python.
+- Readability and consistency. 
 - Relevance: Your solution should surface documents which have contents and titles related to the keywords being searched for. Beyond that, don't spend too much time fine tuning
 the relevance of the system.
 
