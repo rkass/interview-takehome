@@ -1,5 +1,6 @@
 import logging
 import os
+import pickle
 import requests
 import time
 from functools import lru_cache
@@ -17,6 +18,7 @@ URL = 'https://en.wikipedia.org/wiki/Wikipedia:Multiyear_ranking_of_most_viewed_
 WIKI_API = 'https://en.wikipedia.org/w/api.php'
 REPO_NAME = 'wikisrepo'
 SNAPSHOT_NAME = 'wikis'
+PICKLE_FILE_NAME = '/serialized_docs/docs.pickle'
 
 LIST_INDEX_TO_NAME = {
     0: 'Top-100 list',
@@ -109,7 +111,16 @@ def gen_documents():
 
 
 def load_data():
-    for doc in gen_documents():
+    if not os.path.isfile(PICKLE_FILE_NAME):
+        logger.info('Generating documents')
+        unpickled_docs = [doc for doc in gen_documents()]
+        with open(PICKLE_FILE_NAME, 'wb') as f:
+            logger.info('Finished generating documents, serializing documents to pickle')
+            pickle.dump(unpickled_docs, f)
+    logger.info('Loading docs from pickle')
+    docs = pickle.load(open(PICKLE_FILE_NAME, 'rb'))
+    logger.info('Writing docs to elasticsearch')
+    for doc in docs:
         _client_for_host(ES_HOST).index(index=INDEX_NAME, body=doc)
 
 

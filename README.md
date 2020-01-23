@@ -29,8 +29,10 @@ above data into that elasticsearch instance.
 docker-compose up
 ```
 
-The first time these containers are brought up, loading the data into the `wikis` index will take around five minutes.
-Each run thereafter, loading the `wikis` index should happen immediately as the index will be restored from a local snapshot.
+In order to keep the assignment consistent and not subject to 
+wikipedia being a static asset, the program doesn't actually reach out to the wiki page. The first time these containers are brought up, loading the data into the `wikis` index will happen from a serialized pickle 
+file containing the documents from the wiki page listed.
+Each run thereafter, loading the `wikis` index will cause the data to be restored from a local snapshot.
 
 ### What You'll Write
 

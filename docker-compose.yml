@@ -28,3 +28,4 @@ services:
     volumes:
       - ./src:/src
       - ./snapshot:/snapshot
+      - ./serialized_docs:/serialized_docs
