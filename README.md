@@ -9,9 +9,11 @@ to the following lists which appear in the above article:
 - Top-100 list
 - Countries
 - Cities
+- Buildings & Structures & Statues
 - People
 - Singers
 - Actors
+- Romantic Actors
 - Athletes
 - Modern political leaders
 - Pre-modern people

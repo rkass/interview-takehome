@@ -22,13 +22,15 @@ LIST_INDEX_TO_NAME = {
     0: 'Top-100 list',
     1: 'Countries',
     2: 'Cities',
-    3: 'People',
-    4: 'Singers',
-    5: 'Actors',
-    6: 'Athletes',
-    7: 'Modern Political Leaders',
-    8: 'Pre-modern people',
-    9: '3rd-millennium people'
+    3: 'Buildings & Structures & Statues',
+    4: 'People',
+    5: 'Singers',
+    6: 'Actors',
+    7: 'Romantic Actors',
+    8: 'Athletes',
+    9: 'Modern Political Leaders',
+    10: 'Pre-modern people',
+    11: '3rd-millennium people'
 }
 
 INDEX_BODY = {
