@@ -88,10 +88,10 @@ def gen_docs_from_table(table):
     for row in rows[1:]:
         cols = row.find_all('td')
         rank = cols[0].text.strip()
-        link_td = cols[1].find_all('a')[0]
-        title = link_td['title']
-        link = link_td['href']
         if rank.isdigit():
+            link_td = cols[1].find_all('a')[0]
+            title = link_td['title']
+            link = link_td['href']
             contents = contents_from_wiki(title)
             yield {'rank': rank, 'title': title, 'contents': contents, 'link': link}
 
