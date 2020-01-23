@@ -21,7 +21,7 @@ to the following lists which appear in the above article:
 
 ### Provided
 
-This repo provides a utility to load the data from those articles into an elasticsearch index called `wikis`. 
+This repo provides a utility to load the data from a snapshot of those articles into an elasticsearch index called `wikis`. 
 Running the following command will bring up an elasticsearch instance as well as a utility which will load the 
 above data into that elasticsearch instance.
 
@@ -29,8 +29,8 @@ above data into that elasticsearch instance.
 docker-compose up
 ```
 
-The first time these containers are brought up, loading the data into the `wikis` index will take around five minutes.
-Each run thereafter, loading the `wikis` index should happen immediately as the index will be restored from a local snapshot.
+So that this assignment isn't subject to the wikipedia page remaining static, the data source will actually be the locally
+provided snapshot of this page. Loading the index should happen within seconds.
 
 ### What You'll Write
 
