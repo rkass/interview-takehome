@@ -12,13 +12,14 @@ logger = logging.getLogger(__name__)
 logger.addHandler(logging.StreamHandler())
 logger.setLevel(logging.INFO)
 
-ES_HOST = 'elasticsearch:9200'
+ES_HOST = os.environ.get('ES_HOST', 'elasticsearch:9200')
 INDEX_NAME = 'wikis'
 URL = 'https://en.wikipedia.org/wiki/Wikipedia:Multiyear_ranking_of_most_viewed_pages'
 WIKI_API = 'https://en.wikipedia.org/w/api.php'
 REPO_NAME = 'wikisrepo'
 SNAPSHOT_NAME = 'wikis'
-PICKLE_FILE_NAME = '/serialized_docs/docs.pickle'
+PICKLE_FILE_NAME = os.environ.get('PICKLE_FILE_NAME', '/serialized_docs/docs.pickle')
+SNAPSHOT_DIR = os.environ.get('SNAPSHOT_DIR', '/snapshot')
 
 LIST_INDEX_TO_NAME = {
     0: 'Top-100 list',
@@ -146,7 +147,7 @@ def create_snapshot():
 
 
 def prep_index():
-    snapshot_contents = [f for f in os.listdir('/snapshot') if f != '.gitignore']
+    snapshot_contents = [f for f in os.listdir(SNAPSHOT_DIR) if f != '.gitignore']
     if snapshot_contents:
         logger.info('Restoring wikis index')
         create_repo()
