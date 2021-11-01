@@ -84,7 +84,7 @@ def _indices_client_for_host(host):
 def contents_from_wiki(title):
     response = requests.get(WIKI_API,
                  params={'action': 'parse', 'page': title, 'format': 'json'}).json()
-    return response['parse']['text']['*']
+    return response.get('parse', {}).get('text', {}).get('*')
 
 
 def gen_docs_from_table(table):
@@ -97,7 +97,8 @@ def gen_docs_from_table(table):
             title = link_td['title']
             link = link_td['href']
             contents = contents_from_wiki(title)
-            yield {'rank': rank, 'title': title, 'contents': contents, 'link': link}
+            if contents:
+                yield {'rank': rank, 'title': title, 'contents': contents, 'link': link}
 
 
 def gen_documents():
@@ -121,7 +122,7 @@ def load_data():
     docs = pickle.load(open(PICKLE_FILE_NAME, 'rb'))
     logger.info('Writing docs to elasticsearch')
     for doc in docs:
-        _client_for_host(ES_HOST).index(index=INDEX_NAME, body=doc)
+        _client_for_host(ES_HOST).index(index=INDEX_NAME, document=doc)
 
 
 def create_index():
