@@ -12,13 +12,14 @@ logger = logging.getLogger(__name__)
 logger.addHandler(logging.StreamHandler())
 logger.setLevel(logging.INFO)
 
-ES_HOST = 'elasticsearch:9200'
+ES_HOST = os.environ.get('ES_HOST', 'elasticsearch:9200')
 INDEX_NAME = 'wikis'
 URL = 'https://en.wikipedia.org/wiki/Wikipedia:Multiyear_ranking_of_most_viewed_pages'
 WIKI_API = 'https://en.wikipedia.org/w/api.php'
 REPO_NAME = 'wikisrepo'
 SNAPSHOT_NAME = 'wikis'
-PICKLE_FILE_NAME = '/serialized_docs/docs.pickle'
+PICKLE_FILE_NAME = os.environ.get('PICKLE_FILE_NAME', '/serialized_docs/docs.pickle')
+SNAPSHOT_DIR = os.environ.get('SNAPSHOT_DIR', '/snapshot')
 
 LIST_INDEX_TO_NAME = {
     0: 'Top-100 list',
@@ -84,7 +85,7 @@ def _indices_client_for_host(host):
 def contents_from_wiki(title):
     response = requests.get(WIKI_API,
                  params={'action': 'parse', 'page': title, 'format': 'json'}).json()
-    return response['parse']['text']['*']
+    return response.get('parse', {}).get('text', {}).get('*')
 
 
 def gen_docs_from_table(table):
@@ -97,7 +98,8 @@ def gen_docs_from_table(table):
             title = link_td['title']
             link = link_td['href']
             contents = contents_from_wiki(title)
-            yield {'rank': rank, 'title': title, 'contents': contents, 'link': link}
+            if contents:
+                yield {'rank': rank, 'title': title, 'contents': contents, 'link': link}
 
 
 def gen_documents():
@@ -121,7 +123,7 @@ def load_data():
     docs = pickle.load(open(PICKLE_FILE_NAME, 'rb'))
     logger.info('Writing docs to elasticsearch')
     for doc in docs:
-        _client_for_host(ES_HOST).index(index=INDEX_NAME, body=doc)
+        _client_for_host(ES_HOST).index(index=INDEX_NAME, document=doc)
 
 
 def create_index():
@@ -145,7 +147,7 @@ def create_snapshot():
 
 
 def prep_index():
-    snapshot_contents = [f for f in os.listdir('/snapshot') if f != '.gitignore']
+    snapshot_contents = [f for f in os.listdir(SNAPSHOT_DIR) if f != '.gitignore']
     if snapshot_contents:
         logger.info('Restoring wikis index')
         create_repo()
